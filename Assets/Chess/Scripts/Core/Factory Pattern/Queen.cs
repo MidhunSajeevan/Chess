@@ -1,7 +1,7 @@
 using Chess.Scripts.Core;
 using UnityEngine;
 
-public class Bishop : IChessPiece
+public class Queen : IChessPiece
 {
     Cell cell;
     public void HighlightPossibleMoves(ChessPlayerPlacementHandler placementHandler)
@@ -9,9 +9,9 @@ public class Bishop : IChessPiece
         //Size of the board
         int boardSize = 8;
 
-        // Define the possible moves relative to the bishop's position (diagonal movement)
-        int[] rowOffsets = { 1, 1, -1, -1 };
-        int[] colOffsets = { 1, -1, 1, -1 };
+        // Define the possible moves relative to the queen's position (combination of rook and bishop movements)
+        int[] rowOffsets = { 1, 1, 1, -1, -1, -1, 0, 0 };
+        int[] colOffsets = { 1, -1, 0, 1, -1, 0, 1, -1 };
 
         for (int i = 0; i < rowOffsets.Length; i++)
         {
@@ -38,6 +38,7 @@ public class Bishop : IChessPiece
                     // Enemy player, highlight as red
                     ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
                     break;
+
 
                 }
                 else

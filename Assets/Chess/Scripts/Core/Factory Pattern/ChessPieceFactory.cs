@@ -5,7 +5,7 @@ public static class ChessPieceFactory
         ChessBoardPlacementHandler.Instance.ClearHighlights();
         switch (pieceName)
         {
-            //Return the knight product
+           //Create the Instance according to the Piece name
             case "Knight":
                 return new Knight();
             case "King":
@@ -16,6 +16,8 @@ public static class ChessPieceFactory
                 return new Pawn();
             case "Bishop":
                 return new Bishop();
+            case "Queen":
+                return new Queen();
             default:
                 return null;
         }

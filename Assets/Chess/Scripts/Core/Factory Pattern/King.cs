@@ -34,7 +34,7 @@ public class King : IChessPiece
 
                     // Enemy player, highlight as red
                     ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
-
+                    break;
 
                 }
                 else

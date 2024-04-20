@@ -34,8 +34,8 @@ public class Knight : IChessPiece
                 {
                         
                             // Enemy player, highlight as red
-                            ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
-                       
+                    ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
+                       break;
                     
                 }
                 else
