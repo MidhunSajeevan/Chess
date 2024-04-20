@@ -10,7 +10,12 @@ public static class ChessPieceFactory
                 return new Knight();
             case "King":
                 return new King();
-            // Add cases for other chess pieces as needed
+            case "Rook":
+                return new Rook();
+            case "Pawn":
+                return new Pawn();
+            case "Bishop":
+                return new Bishop();
             default:
                 return null;
         }

@@ -1,7 +1,7 @@
 using Chess.Scripts.Core;
 using UnityEngine;
 
-public class King : IChessPiece
+public class Rook : IChessPiece
 {
     Cell cell;
     public void HighlightPossibleMoves(ChessPlayerPlacementHandler placementHandler)
@@ -9,42 +9,42 @@ public class King : IChessPiece
         //Size of the board
         int boardSize = 8;
 
-        // Define the possible moves relative to the king's position
-        int[] rowOffsets = { 1, 1, 1, -1, -1, -1, 0, 0 };
-        int[] colOffsets = { 1, -1, 0, 1, -1, 0, 1, -1 };
+        // Define the possible moves relative to the rook's position (vertical and horizontal)
+        int[] rowOffsets = { 1, -1, 0, 0 };
+        int[] colOffsets = { 0, 0, 1, -1 };
 
         for (int i = 0; i < rowOffsets.Length; i++)
         {
-            int newRow = placementHandler.row + rowOffsets[i];
-            int newCol = placementHandler.column + colOffsets[i];
+            int newRow = placementHandler.row;
+            int newCol = placementHandler.column;
 
-            if (IsWithinBounds(newRow, newCol, boardSize))
+            while (true)
             {
+                newRow += rowOffsets[i];
+                newCol += colOffsets[i];
 
-                // Check if there is a player at the target position      
+                if (!IsWithinBounds(newRow, newCol, boardSize)) break;
+
+                // Check if there is a player at the target position
                 cell = ChessBoardPlacementHandler.Instance.GetTile(newRow, newCol).GetComponent<Cell>();
 
-                // Check if the Cell is alrady occupied and the player is belong to the same team 
+                // Check if the Cell is already occupied and the player is from the same team
                 if (cell.IsOccupied && cell.Color == placementHandler.playerColor)
                 {
-                    continue;
+                    break; // Stop highlighting in this direction
                 }
                 else if (cell.IsOccupied)
                 {
-
                     // Enemy player, highlight as red
                     ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
-
-
+                    break; // Stop highlighting in this direction after highlighting the enemy piece
                 }
                 else
                 {
                     // Empty tile, highlight as default color
                     ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.green);
                 }
-
             }
-
         }
     }
 

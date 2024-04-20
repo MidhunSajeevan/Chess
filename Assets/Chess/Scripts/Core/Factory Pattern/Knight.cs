@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Knight : IChessPiece
 {
+    Cell cell;
     public void HighlightPossibleMoves(ChessPlayerPlacementHandler placementHandler)
     {
         //Size of the board
@@ -21,25 +22,21 @@ public class Knight : IChessPiece
             if (IsWithinBounds(newRow, newCol, boardSize))
             {
                
-                // Check if there is a player at the target position
-                GameObject targetTile = ChessBoardPlacementHandler.Instance.GetTile(newRow, newCol);
-                if (targetTile != null)
+                // Check if there is a player at the target position      
+                cell = ChessBoardPlacementHandler.Instance.GetTile(newRow, newCol).GetComponent<Cell>();
+                
+                // Check if the Cell is alrady occupied and the player is belong to the same team 
+                if(cell.IsOccupied && cell.Color == placementHandler.playerColor)
                 {
-                    Cell cell = targetTile.GetComponent<Cell>();
-                    if (cell.IsOccupied == true)
-                    {
-                        // Check if the player at the target position is the same color (black or white)
-                        if (cell.Color == placementHandler.playerColor)
-                        {
-                            // Same color player, no need to highlight
-                            continue;
-                        }
-                        else
-                        {
+                    continue;
+                }
+                else if (cell.IsOccupied)
+                {
+                        
                             // Enemy player, highlight as red
                             ChessBoardPlacementHandler.Instance.Highlight(newRow, newCol, Color.red);
-                        }
-                    }
+                       
+                    
                 }
                 else
                 {
